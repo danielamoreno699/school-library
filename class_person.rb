@@ -1,6 +1,5 @@
 require './nameable'
 
-
 class Person < Nameable
   # setters and getters
   attr_accessor :name, :age
