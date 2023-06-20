@@ -2,7 +2,6 @@ require "./nameable.rb"
 
 
 class Person < Nameable
-  include Nameable
   # setters and getters
   attr_accessor :name, :age
   attr_reader :id
@@ -28,8 +27,8 @@ class Person < Nameable
   end
 
   # method that returns name
-  def correct_name?(name)
-    @name = name
+  def correct_name?
+    @name
   end
 
 end
