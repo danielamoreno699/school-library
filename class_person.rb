@@ -1,4 +1,8 @@
-class Person
+require "./nameable.rb"
+
+
+class Person < Nameable
+  include Nameable
   # setters and getters
   attr_accessor :name, :age
   attr_reader :id
