@@ -36,4 +36,10 @@ class App
         puts "Person created: Name: #{person.name}, Age: #{person.age}"
     end
 
+    def create_book(title, author)
+        book = Book.new(title, author)
+        @books.push(book)
+        puts "Book created: Title: #{book.title}, Author: #{book.author}"
+    end
+
 end
