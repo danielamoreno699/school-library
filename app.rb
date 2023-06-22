@@ -42,4 +42,14 @@ class App
         puts "Book created: Title: #{book.title}, Author: #{book.author}"
     end
 
+    def create_rental(book_title, person_name, date)
+        book = @books.find { |book| book.title == book_title }
+        person = @people.find { |person| person.name == person_name }
+        rental = Rental.new(date, book, person)
+        @rentals.push(rental)
+        puts "Rental created: Book: #{book.title}, Person: #{person.name}, Date: #{rental.date}"
+    end
+
+   
+
 end
