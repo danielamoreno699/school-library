@@ -11,11 +11,11 @@ class App
     @rentals = []
   end
 
-  def list_all_books(books)
-    if books.empty?
+  def list_all_books
+    if @books.empty?
       puts 'Empty list'
     else
-      books.each do |book|
+      @books.each do |book|
         puts "Title: #{book.title} Author: #{book.author}"
       end
     end
@@ -41,6 +41,7 @@ class App
       puts 'Invalid person type!'
       return
     end
+
 
     @people.push(person)
     puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
