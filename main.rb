@@ -68,7 +68,6 @@ def list_all_books_index
   end
 end
 
-
 def create_person
   print 'Do you want to create a student (1) or a teacher (2) [input the number]: '
   type_choice = gets.chomp.to_i
