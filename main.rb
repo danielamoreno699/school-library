@@ -13,7 +13,7 @@ OPTIONS = {
 }.freeze
 
 def main
-  #display_menu
+  # display_menu
 
   loop do
     display_menu
@@ -49,37 +49,25 @@ def handle_choice(choice)
 end
 
 def list_all_books
-  @app.list_all_books.each_with_index do |book, index|
-    puts "#{index + 1}) #{book.title} by #{book.author}"
-  end
+  @app.list_all_books
 end
 
 def list_all_people
+  @app.list_all_people
+end
+
+def list_all_people_index
   @app.list_all_people.each_with_index do |person, index|
     puts "#{index + 1}) #{person.name}, Age: #{person.age}"
   end
 end
 
+def list_all_books_index
+  @app.list_all_books.each_with_index do |book, index|
+    puts "#{index + 1}) #{book.title} by #{book.author}"
+  end
+end
 
-# def list_all_books
-#   @app.list_all_books
-# end
-
-# def list_all_people
-#   @app.list_all_people
-# end
-
-# def create_person
-#   print 'Enter the person name: '
-#   name = gets.chomp
-#   print 'Enter the person age: '
-#   age = gets.chomp.to_i
-#   print 'Enter the person type (student/teacher): '
-#   type = gets.chomp.downcase
-#   print 'Enter if the person has permission (y/n): '
-#   parent_permission = gets.chomp.downcase == 'y'
-#   @app.create_person(name, age, type, parent_permission)
-# end
 
 def create_person
   print 'Do you want to create a student (1) or a teacher (2) [input the number]: '
@@ -95,7 +83,6 @@ def create_person
   end
 end
 
-
 def create_student
   print 'Enter the student name: '
   name = gets.chomp
@@ -103,7 +90,7 @@ def create_student
   age = gets.chomp.to_i
   print 'Enter if the student has permission (y/n): '
   has_permission = gets.chomp.downcase == 'y'
-  extra_info = {parent_permission: has_permission}
+  extra_info = { parent_permission: has_permission }
   @app.create_person(name, age, 'student', extra_info)
 end
 
@@ -116,7 +103,6 @@ def create_teacher
   specialization = gets.chomp
   extra_info = { specialization: specialization }
   @app.create_person(name, age, 'teacher', extra_info)
-
 end
 
 def create_book
@@ -127,39 +113,26 @@ def create_book
   @app.create_book(title, author)
 end
 
-# def create_rental
-#   print 'Enter the book title: '
-#   book_title = gets.chomp
-#   print 'Enter the person name: '
-#   person_name = gets.chomp
-#   print 'Enter the rental date (YYYY-MM-DD): '
-#   date = gets.chomp
-#   @app.create_rental(book_title, person_name, date)
-# end
-
 def create_rental
-  puts "Available Books:"
-  list_all_books
-  print "Select a book from the list (enter the index): "
+  puts 'Available Books:'
+  list_all_books_index
+  print 'Select a book from the list (enter the index): '
   book_index = gets.chomp.to_i - 1
 
 
   puts "\nAvailable People:"
-  list_all_people
-  print "Select a person from the list (enter the index): "
+  list_all_people_index
+  print 'Select a person from the list (enter the index): '
   person_index = gets.chomp.to_i - 1
 
-  print "Enter the rental date (YYYY-MM-DD): "
+  print 'Enter the rental date (YYYY-MM-DD): '
   date = gets.chomp
 
-  # Retrieve the selected book and person based on the choices made
   selected_book = @app.get_book_by_index(book_index)
   selected_person = @app.get_person_by_index(person_index)
 
-  # Create the rental using the selected book, person, and date
   @app.create_rental(selected_book, selected_person, date)
 end
-
 
 def list_rentals_for_person
   print 'Enter the person ID: '

@@ -27,9 +27,13 @@ class App
     else
       @people.each do |person|
         if person.is_a?(Student)
-          puts "[Student] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age},Permission: #{person.parent_permission}"
+          puts "[Student] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
+               "Permission: #{person.parent_permission}"
+
         elsif person.is_a?(Teacher)
-          puts "[Teacher] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, specialization: #{person.specialization}"
+          puts "[Teacher] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
+               "specialization: #{person.specialization}"
+
         end
       end
     end
@@ -59,11 +63,11 @@ class App
   def get_book_by_index(book_index)
     @books[book_index] if book_index >= 0 && book_index < @books.length
   end
-  
+
   def get_person_by_index(person_index)
     @people[person_index] if person_index >= 0 && person_index < @people.length
   end
-  
+
   def create_rental(book, person, date)
     if book && person
       rental = Rental.new(book, person, date)
@@ -74,8 +78,7 @@ class App
       puts 'Invalid book or person!'
     end
   end
-  
-  
+
   def list_rentals_for_person_id(id)
     found_person = @people.find { |p| p.id == id }
 
