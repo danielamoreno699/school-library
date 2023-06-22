@@ -33,7 +33,7 @@ class Person < Nameable
     @name
   end
 
-  def add_rental( rental)
+  def add_rental(rental)
     rentals << rental unless rentals.include?(rental)
     puts "Rental added to person: Person ID: #{id}, Rental Date: #{rental.date}, Book Title: #{rental.book.title}"
   end
