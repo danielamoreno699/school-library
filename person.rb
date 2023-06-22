@@ -1,7 +1,7 @@
 require './nameable'
 
 class Person < Nameable
-  attr_accessor :name, :age, :rentals
+  attr_accessor :name, :age, :rentals, :parent_permission
   attr_reader :id
 
   # attr_reader :id, :rentals
@@ -33,8 +33,12 @@ class Person < Nameable
     @name
   end
 
-  def add_rental(book, date)
-    rental = Rental.new(date, book, self)
-    @rentals << rental
+  def add_rental( rental)
+    rentals << rental unless rentals.include?(rental)
+    puts "Rental added to person: Person ID: #{id}, Rental Date: #{rental.date}, Book Title: #{rental.book.title}"
   end
+  # def add_rental(book, date)
+  #   rental = Rental.new(date, book, self)
+  #   @rentals << rental
+  # end
 end

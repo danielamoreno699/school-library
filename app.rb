@@ -1,6 +1,8 @@
 require_relative 'person'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'student'
+require_relative 'teacher'
 
 class App
     def initialize
@@ -17,7 +19,7 @@ class App
 
     def list_all_people
         @people.each do |person|
-            puts "Name: #{person.name} Age: #{person.age} Parent Permission: #{person.parent_permission}"
+            puts " ID: #{person.id} Name: #{person.name} Age: #{person.age} Parent Permission: #{person.parent_permission}"
         end
     end
 
@@ -33,7 +35,7 @@ class App
 
        
         @people.push(person)
-        puts "Person created: Name: #{person.name}, Age: #{person.age}"
+        puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
     end
 
     def create_book(title, author)
@@ -43,20 +45,47 @@ class App
     end
 
     def create_rental(book_title, person_name, date)
-        book = @books.find { |book| book.title == book_title }
-        person = @people.find { |person| person.name == person_name }
-        rental = Rental.new(date, book, person)
-        @rentals.push(rental)
-        puts "Rental created: Book: #{book.title}, Person: #{person.name}, Date: #{rental.date}"
+        book = _find_book_by_title(book_title)
+        person = _find_person_by_name(person_name)
+      
+        if book && person && date != ''
+
+        rental = Rental.new(book, person, date)
+        book.add_rental(rental)
+        person.add_rental(rental)
+        
+    puts "Rental created: Book Title: #{book.title}, Person Name: #{person.name},Date: #{date}"
+          else
+            puts 'Invalid book title or person name!'
+          end
+      end
+
+    def _find_book_by_title(title)
+      @books.find { |book| book.title == title }
     end
 
-    def list_rentals_for_person_id(id)
+    def _find_person_by_name(name)
+        @people.find { |person| person.name == name }
+      end
+
+      def list_rentals_for_person_id(id)
         person = @people.find { |person| person.id == id }
-        rentals = @rentals.select { |rental| rental.person.id == person.id }
-        rentals.each do |rental|
-            puts "Date: #{rental.date}, Book: #{rental.book.title}"
+      
+        if person
+          rentals = person.rentals
+      
+          if rentals.empty?
+            puts "No rentals found for person with ID #{id}."
+          else
+            puts "Rentals for person with ID #{id}:"
+            rentals.each do |rental|
+              puts "Date: #{rental.date}, Book: #{rental.book.title}"
+            end
+          end
+        else
+          puts "Person with ID #{id} not found."
         end
-    end
-   
+      end
+      
 
 end

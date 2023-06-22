@@ -1,4 +1,6 @@
-require_relative 'app'
+require './app'
+
+@app = App.new 
 
 def main
     puts 'Please select an option:'
@@ -16,9 +18,9 @@ def main
     
         case choice
         when 1
-          app.list_all_books
+            @app.list_all_books
         when 2
-          app.list_all_people
+            @app.list_all_people
         when 3
             print 'Enter the person name: '
             name = gets.chomp
@@ -26,25 +28,25 @@ def main
             age = gets.chomp.to_i
             print 'Enter the person type (student/teacher): '
             type = gets.chomp.downcase
-            app.create_person(name, age, type)
+            @app.create_person(name, age, type)
         when 4
             print 'Enter the book title: '
             title = gets.chomp
             print 'Enter the book author: '
             author = gets.chomp
-            app.create_book(title, author)
+            @app.create_book(title, author)
         when 5
             print 'Enter the book title: '
             book_title = gets.chomp
             print 'Enter the person name: '
             person_name = gets.chomp
-            print 'Enter the rental date: '
+            print 'Enter the rental date(YYYY-MM-DD): '
             date = gets.chomp
-            app.create_rental(book_title, person_name, date)
+            @app.create_rental(book_title, person_name, date)
         when 6
             print 'Enter the person ID: '
             id = gets.chomp.to_i
-            app.list_rentals_for_person_id(id)
+            @app.list_rentals_for_person_id(id)
         when 7
           puts 'Thank you for using the Library Management System. Goodbye!'
           break
