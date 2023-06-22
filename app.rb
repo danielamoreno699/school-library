@@ -49,7 +49,6 @@ class App
       return
     end
 
-
     @people.push(person)
     puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
   end
