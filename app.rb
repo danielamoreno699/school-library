@@ -21,4 +21,19 @@ class App
         end
     end
 
+    def create_person(name, age, type)
+        if type == 'student'
+            person = Student.new(name, age)
+        elsif type == 'teacher'
+            person = Teacher.new(name, age)
+        else
+            puts 'Invalid person type!'
+            return
+        end
+
+       
+        @people.push(person)
+        puts "Person created: Name: #{person.name}, Age: #{person.age}"
+    end
+
 end
