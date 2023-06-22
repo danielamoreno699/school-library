@@ -58,30 +58,42 @@ class App
     puts "Book created: Title: #{book.title}, Author: #{book.author}"
   end
 
-  def create_rental(book_title, person_name, date)
-    book = _find_book_by_title(book_title)
-    person = _find_person_by_name(person_name)
+  # def create_rental(book_title, person_name, date)
+  #   book = _find_book_by_title(book_title)
+  #   person = _find_person_by_name(person_name)
 
-    if book && person && date != ''
+  #   if book && person && date != ''
 
+  #     rental = Rental.new(book, person, date)
+  #     book.add_rental(rental)
+  #     person.add_rental(rental)
+
+  #     puts "Rental created: Book Title: #{book.title}, Person Name: #{person.name},Date: #{date}"
+  #   else
+  #     puts 'Invalid book title or person name!'
+  #   end
+  # end
+
+  def get_book_by_index(book_index)
+    @books[book_index] if book_index >= 0 && book_index < @books.length
+  end
+  
+  def get_person_by_index(person_index)
+    @people[person_index] if person_index >= 0 && person_index < @people.length
+  end
+  
+  def create_rental(book, person, date)
+    if book && person
       rental = Rental.new(book, person, date)
       book.add_rental(rental)
       person.add_rental(rental)
-
-      puts "Rental created: Book Title: #{book.title}, Person Name: #{person.name},Date: #{date}"
+      puts "Rental created: Book Title: #{book.title}, Person Name: #{person.name}, Date: #{date}"
     else
-      puts 'Invalid book title or person name!'
+      puts 'Invalid book or person!'
     end
   end
-
-  def _find_book_by_title(title)
-    @books.find { |book| book.title == title }
-  end
-
-  def _find_person_by_name(name)
-    @people.find { |person| person.name == name }
-  end
-
+  
+  
   def list_rentals_for_person_id(id)
     found_person = @people.find { |p| p.id == id }
 
