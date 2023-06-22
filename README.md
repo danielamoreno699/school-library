@@ -71,6 +71,8 @@ git clone https://github.com/danielamoreno699/school-library.git
 
 cd school-library
 
+execute: ruby main.rb 
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- AUTHORS -->
