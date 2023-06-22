@@ -12,14 +12,22 @@ class App
     end
 
     def list_all_books
-        @books.each do |book|
-            puts "Title: #{book.title} Author: #{book.author}"
-        end
+        if @books.empty?
+            puts 'Empty list'
+          else
+            @books.each do |book|
+              puts "Title: #{book.title} Author: #{book.author}"
+            end
+          end
     end
 
     def list_all_people
+        if @people.empty?
+            puts 'Empty list'
+        else
         @people.each do |person|
             puts " ID: #{person.id} Name: #{person.name} Age: #{person.age} Parent Permission: #{person.parent_permission}"
+            end
         end
     end
 
