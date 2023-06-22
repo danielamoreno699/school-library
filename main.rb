@@ -92,6 +92,17 @@ def create_student
   @app.create_person(name, age, 'student', extra_info)
 end
 
+def create_teacher
+  print 'Enter the teacher name: '
+  name = gets.chomp
+  print 'Enter the teacher age: '
+  age = gets.chomp.to_i
+  print 'Enter the teacher specialization: '
+  specialization = gets.chomp
+  extra_info = { specialization: specialization }
+  @app.create_person(name, age, 'teacher', extra_info)
+
+end
 
 def create_book
   print 'Enter the book title: '

@@ -26,8 +26,13 @@ class App
       puts 'Empty list'
     else
       @people.each do |person|
-        puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
-             "Permission: #{person.parent_permission}"
+        if person.is_a?(Student)
+          puts "[Student] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age},Permission: #{person.parent_permission}"
+        elsif person.is_a?(Teacher)
+          puts "[Teacher] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, specialization: #{person.specialization}"
+        end
+        # puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
+        #      "Permission: #{person.parent_permission}"
       end
     end
   end
