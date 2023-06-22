@@ -26,14 +26,15 @@ class App
       puts 'Empty list'
     else
       @people.each do |person|
-        puts " ID: #{person.id} Name: #{person.name} Age: #{person.age} Parent Permission: #{person.parent_permission}"
+        puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
+             "Permission: #{person.parent_permission}"
       end
     end
   end
 
-  def create_person(name, age, type)
+  def create_person(name, age, type, parent_permission)
     if type == 'student'
-      person = Student.new(name, age)
+      person = Student.new(name, age, parent_permission: parent_permission)
     elsif type == 'teacher'
       person = Teacher.new(name, age)
     else
@@ -43,7 +44,8 @@ class App
 
 
     @people.push(person)
-    puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+    puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
+         "Permission: #{person.parent_permission}"
   end
 
   def create_book(title, author)

@@ -61,7 +61,9 @@ def create_person
   age = gets.chomp.to_i
   print 'Enter the person type (student/teacher): '
   type = gets.chomp.downcase
-  @app.create_person(name, age, type)
+  print 'Enter if the person has permission (y/n): '
+  parent_permission = gets.chomp.downcase == 'y'
+  @app.create_person(name, age, type, parent_permission)
 end
 
 def create_book
