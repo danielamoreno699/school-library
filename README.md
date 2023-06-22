@@ -1,6 +1,8 @@
 <a name="readme-top"></a>
 
-
+<div align="center">
+   <img src="./assets/ruby2.png" alt="logo" width="1000"  height="500" />
+</div>
 
 <div align="center">
   <h2><b>School Library</b></h2>
