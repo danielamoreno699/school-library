@@ -31,8 +31,6 @@ class App
         elsif person.is_a?(Teacher)
           puts "[Teacher] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, specialization: #{person.specialization}"
         end
-        # puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
-        #      "Permission: #{person.parent_permission}"
       end
     end
   end
@@ -57,22 +55,6 @@ class App
     @books.push(book)
     puts "Book created: Title: #{book.title}, Author: #{book.author}"
   end
-
-  # def create_rental(book_title, person_name, date)
-  #   book = _find_book_by_title(book_title)
-  #   person = _find_person_by_name(person_name)
-
-  #   if book && person && date != ''
-
-  #     rental = Rental.new(book, person, date)
-  #     book.add_rental(rental)
-  #     person.add_rental(rental)
-
-  #     puts "Rental created: Book Title: #{book.title}, Person Name: #{person.name},Date: #{date}"
-  #   else
-  #     puts 'Invalid book title or person name!'
-  #   end
-  # end
 
   def get_book_by_index(book_index)
     @books[book_index] if book_index >= 0 && book_index < @books.length
@@ -105,7 +87,7 @@ class App
       else
         puts "Rentals for person with ID #{id}:"
         rentals.each do |rental|
-          puts "Date: #{rental.date}, Book: #{rental.book.title}"
+          puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}"
         end
       end
     else
