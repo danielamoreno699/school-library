@@ -32,11 +32,11 @@ class App
     end
   end
 
-  def create_person(name, age, type, parent_permission)
+  def create_person(name, age, type, extra_info)
     if type == 'student'
-      person = Student.new(name, age, parent_permission: parent_permission)
+      person = Student.new(name, age, parent_permission: extra_info[:parent_permission])
     elsif type == 'teacher'
-      person = Teacher.new(name, age)
+      person = Teacher.new(name, age, extra_info[:specialization])
     else
       puts 'Invalid person type!'
       return
@@ -44,8 +44,7 @@ class App
 
 
     @people.push(person)
-    puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
-         "Permission: #{person.parent_permission}"
+    puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
   end
 
   def create_book(title, author)

@@ -54,17 +54,44 @@ def list_all_people
   @app.list_all_people
 end
 
+# def create_person
+#   print 'Enter the person name: '
+#   name = gets.chomp
+#   print 'Enter the person age: '
+#   age = gets.chomp.to_i
+#   print 'Enter the person type (student/teacher): '
+#   type = gets.chomp.downcase
+#   print 'Enter if the person has permission (y/n): '
+#   parent_permission = gets.chomp.downcase == 'y'
+#   @app.create_person(name, age, type, parent_permission)
+# end
+
 def create_person
-  print 'Enter the person name: '
-  name = gets.chomp
-  print 'Enter the person age: '
-  age = gets.chomp.to_i
-  print 'Enter the person type (student/teacher): '
-  type = gets.chomp.downcase
-  print 'Enter if the person has permission (y/n): '
-  parent_permission = gets.chomp.downcase == 'y'
-  @app.create_person(name, age, type, parent_permission)
+  print 'Do you want to create a student (1) or a teacher (2): '
+  type_choice = gets.chomp.to_i
+
+  case type_choice
+  when 1
+    create_student
+  when 2
+    create_teacher
+  else
+    puts 'Invalid person type choice!'
+  end
 end
+
+
+def create_student
+  print 'Enter the student name: '
+  name = gets.chomp
+  print 'Enter the student age: '
+  age = gets.chomp.to_i
+  print 'Enter if the student has permission (y/n): '
+  has_permission = gets.chomp.downcase == 'y'
+  extra_info = {parent_permission: has_permission}
+  @app.create_person(name, age, 'student', extra_info)
+end
+
 
 def create_book
   print 'Enter the book title: '
