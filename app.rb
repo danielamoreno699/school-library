@@ -50,6 +50,13 @@ class App
         puts "Rental created: Book: #{book.title}, Person: #{person.name}, Date: #{rental.date}"
     end
 
+    def list_rentals_for_person_id(id)
+        person = @people.find { |person| person.id == id }
+        rentals = @rentals.select { |rental| rental.person.id == person.id }
+        rentals.each do |rental|
+            puts "Date: #{rental.date}, Book: #{rental.book.title}"
+        end
+    end
    
 
 end
