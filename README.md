@@ -1,6 +1,10 @@
 <a name="readme-top"></a>
 
 <div align="center">
+   <img src="./assets/ruby2.png" alt="logo" width="1000"  height="500" />
+</div>
+
+<div align="center">
   <h2><b>School Library</b></h2>
 </div>
 
@@ -70,6 +74,8 @@ Ruby
 git clone https://github.com/danielamoreno699/school-library.git
 
 cd school-library
+
+execute: ruby main.rb 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
