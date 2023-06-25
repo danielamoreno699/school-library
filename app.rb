@@ -11,40 +11,6 @@ class App
     @rentals = []
   end
 
-  def run
-    loop do
-      display_menu
-      choice = prompt_choice
-      handle_choice(choice)
-      break if choice == 7
-    end
-  end
-
-  def display_menu
-    puts 'Please select an option:'
-    puts '1. List all books'
-    puts '2. List all people'
-    puts '3. Create a person'
-    puts '4. Create a book'
-    puts '5. Create a rental'
-    puts '6. List all rentals for a person'
-    puts '7. Quit'
-  end
-
-  def prompt_choice
-    print 'Enter your choice (1-7): '
-    gets.chomp.to_i
-  end
-
-  def handle_choice(choice)
-    if OPTIONS.key?(choice)
-      send(OPTIONS[choice])
-      puts "\n"
-    else
-      invalid_choice
-    end
-  end
-
   def list_all_books
     if @books.empty?
       puts 'Empty list'
@@ -185,13 +151,5 @@ class App
     else
       puts "Person with ID #{id} not found."
     end
-  end
-
-  def exit_program
-    puts 'Goodbye!'
-  end
-
-  def invalid_choice
-    puts 'Invalid choice!'
   end
 end
