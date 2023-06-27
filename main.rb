@@ -54,6 +54,7 @@ class Menu
       invalid_choice
     end
     puts "\n"
+    display_menu
   end
 
   def invalid_choice

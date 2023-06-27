@@ -1,155 +1,58 @@
-require_relative 'person'
-require_relative 'book'
+
 require_relative 'rental'
-require_relative 'student'
-require_relative 'teacher'
+require_relative 'rental_manager'
+require_relative 'person_manager'
+require_relative 'book_manager'
 
 class App
   def initialize
-    @people = []
-    @books = []
-    @rentals = []
+    @person_manager = PersonManager.new
+    @book_manager = BookManager.new
+    @rental_manager = RentalManager.new
   end
 
   def list_all_books
-    if @books.empty?
-      puts 'Empty list'
-    else
-      @books.each do |book|
-        puts "Title: #{book.title} Author: #{book.author}"
-      end
-    end
+    @book_manager.list_all_books
   end
 
   def list_all_people
-    if @people.empty?
-      puts 'Empty list'
-    else
-      @people.each do |person|
-        if person.is_a?(Student)
-          puts "[Student] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
-               "Permission: #{person.parent_permission}"
-        elsif person.is_a?(Teacher)
-          puts "[Teacher] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
-               "specialization: #{person.specialization}"
-        end
-      end
-    end
+    @person_manager.list_all_people
   end
 
   def create_person
-    print 'Do you want to create a student (1) or a teacher (2) [input the number]: '
-    type_choice = gets.chomp.to_i
-
-    case type_choice
-    when 1
-      create_student
-    when 2
-      create_teacher
-    else
-      puts 'Invalid person type choice!'
-    end
-  end
-
-  def create_student
-    print 'Enter the student name: '
-    name = gets.chomp
-    print 'Enter the student age: '
-    age = gets.chomp.to_i
-    print 'Enter if the student has permission (y/n): '
-    has_permission = gets.chomp.downcase == 'y'
-    extra_info = { parent_permission: has_permission }
-    create_person_instance(name, age, 'student', extra_info)
-  end
-
-  def create_teacher
-    print 'Enter the teacher name: '
-    name = gets.chomp
-    print 'Enter the teacher age: '
-    age = gets.chomp.to_i
-    print 'Enter the teacher specialization: '
-    specialization = gets.chomp
-    extra_info = { specialization: specialization }
-    create_person_instance(name, age, 'teacher', extra_info)
-  end
-
-  def create_person_instance(name, age, type, extra_info)
-    if type == 'student'
-      person = Student.new(name, age, parent_permission: extra_info[:parent_permission])
-    elsif type == 'teacher'
-      person = Teacher.new(name, age, extra_info[:specialization])
-    else
-      puts 'Invalid person type!'
-      return
-    end
-
-    @people.push(person)
-    puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+    @person_manager.create_person
   end
 
   def create_book
-    print 'Enter the book title: '
-    title = gets.chomp
-    print 'Enter the book author: '
-    author = gets.chomp
-    book = Book.new(title, author)
-    @books.push(book)
-    puts "Book created: Title: #{book.title}, Author: #{book.author}"
+    @book_manager.create_book
   end
 
   def create_rental
+    puts 'Available Books:'
+    @book_manager.list_all_books_index
+
     print 'Enter the index of the book you want to rent: '
     book_index = gets.chomp.to_i
+
+    puts 'Available People:'
+    @person_manager.list_all_people_index
+
     print 'Enter the index of the person who wants to rent the book: '
     person_index = gets.chomp.to_i
+
     print 'Enter the rental date (YYYY-MM-DD): '
     date = gets.chomp
-    book = get_book_by_index(book_index)
-    person = get_person_by_index(person_index)
-    create_rental_instance(book, person, date)
+    book = @book_manager.get_book_by_index(book_index)
+    person = @person_manager.get_person_by_index(person_index)
+    @rental_manager.create_rental(book, person, date)
+
   end
 
-  def create_rental_instance(book, person, date)
-    if book && person
-      rental = Rental.new(book, person, date)
-      book.add_rental(rental)
-      person.add_rental(rental)
-      puts "Rental created: Book Title: #{book.title}, Person Name: #{person.name}, Date: #{date}"
-    else
-      puts 'Invalid book or person!'
-    end
-  end
-
-  def get_book_by_index(book_index)
-    @books[book_index] if book_index >= 0 && book_index < @books.length
-  end
-
-  def get_person_by_index(person_index)
-    @people[person_index] if person_index >= 0 && person_index < @people.length
-  end
+  
 
   def list_rentals_for_person
     print 'Enter the ID of the person: '
     id = gets.chomp.to_i
-    list_rentals_for_person_id(id)
-  end
-
-  def list_rentals_for_person_id(id)
-    found_person = @people.find { |p| p.id == id }
-
-    if found_person
-      rentals = found_person.rentals
-
-      if rentals.empty?
-        puts "No rentals found for person with ID #{id}."
-      else
-        puts "Rentals for person with ID #{id}:"
-        rentals.each do |rental|
-          puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}"
-        end
-      end
-    else
-      puts "Person with ID #{id} not found."
-    end
+    @person_manager.list_rentals_for_person_id(id)
   end
 end
