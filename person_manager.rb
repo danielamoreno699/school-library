@@ -17,6 +17,7 @@ class PersonManager
     if @people.empty?
       puts 'Empty list'
     else
+      puts 'List of People:'
       @people.each do |person|
         if person.is_a?(Student)
           puts "[Student] Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, " \
@@ -106,7 +107,7 @@ class PersonManager
     end
 
     @people.push(person)
-    puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+
     
   end
 
@@ -115,7 +116,6 @@ class PersonManager
     File.open('people.json', 'w') do |f|
       f.write(JSON.pretty_generate(people_data))
     end
-    puts 'Data written to people.json'
   end
 
   
@@ -127,8 +127,6 @@ class PersonManager
       people_data.each do |person|
         create_person_instance(person['name'], person['age'], person['type'], person)
       end
-  
-      puts 'People data loaded successfully.'
     else
       puts 'people.json file does not exist.'
     end

@@ -7,9 +7,11 @@ class BookManager
   end
 
   def list_all_books
+
     if @books.empty?
       puts 'Empty list'
     else
+      puts 'List of Books:'
       @books.each do |book|
         puts "Title: #{book.title} Author: #{book.author}"
       end
@@ -17,6 +19,7 @@ class BookManager
   end
 
   def list_all_books_index
+    
     @books.each_with_index do |book, index|
       puts "#{index }) Title: #{book.title}, Author: #{book.author}"
     end
@@ -56,7 +59,8 @@ class BookManager
       else
         book_data = JSON.parse(File.read('book.json'))
         book_data.each do |book|
-          @books << Book.new(book['title'], book['author'])
+          #create_book(book['title'], book['author'])
+           @books << Book.new(book['title'], book['author'])
         end
       end
     else
