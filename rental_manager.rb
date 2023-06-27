@@ -80,14 +80,7 @@ class RentalManager
       book = @books.get_book_by_title(book_title)
       person = @people.get_person_by_name(person_name)
 
-      if book && person
-        rental = Rental.new(book, person, rental_date)
-        book.add_rental(rental)
-        person.add_rental(rental)
-        @rentals.push(rental)
-      else
-        puts 'Invalid book or person!'
-      end
+      create_rental(book, person, rental_date)
     end
   end
   
