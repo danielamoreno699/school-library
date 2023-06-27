@@ -49,7 +49,7 @@ class Menu
     when 6
       @app.list_rentals_for_person
     when 7
-      exit_program
+      @app.exit_program
     else
       invalid_choice
     end
@@ -61,9 +61,6 @@ class Menu
     puts 'Invalid choice!'
   end
 
-  def exit_program
-    puts 'Goodbye!'
-  end
 end
 
 def main

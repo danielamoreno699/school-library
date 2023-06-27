@@ -1,6 +1,8 @@
+require 'json'
 require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
+
 
 class PersonManager
   def initialize
@@ -67,10 +69,9 @@ class PersonManager
     end
   end
 
-
-
-
-  private
+  def get_person_by_name(name)
+    @people.find { |person| person.name == name }
+  end
 
   def create_student
     print 'Enter the student name: '
@@ -106,7 +107,34 @@ class PersonManager
 
     @people.push(person)
     puts "Person created: ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+    
   end
+
+  def write_people_json 
+    people_data = @people.map(&:to_hash)
+    File.open('people.json', 'w') do |f|
+      f.write(JSON.pretty_generate(people_data))
+    end
+    puts 'Data written to people.json'
+  end
+
+  
+  def load_people_data
+    if File.exist?('people.json')
+      file_data = File.read('people.json')
+      people_data = JSON.parse(file_data)
+  
+      people_data.each do |person|
+        create_person_instance(person['name'], person['age'], person['type'], person)
+      end
+  
+      puts 'People data loaded successfully.'
+    else
+      puts 'people.json file does not exist.'
+    end
+  end
+  
+
 
   
 end

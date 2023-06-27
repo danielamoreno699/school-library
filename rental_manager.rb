@@ -1,12 +1,14 @@
 require_relative 'rental'
 require_relative 'person_manager'
 require_relative 'book_manager'
+require_relative 'person'
+require_relative 'book'
 
 class RentalManager
-  def initialize(people, books)
+  def initialize(person_manager, book_manager)
     @rentals = []
-    @people = people
-    @books = books
+    @people = person_manager
+    @books = book_manager
   end
 
   def create_rental_with_input(book_manager, person_manager)
@@ -41,6 +43,7 @@ class RentalManager
     else
       puts 'Invalid book or person!'
     end
+    
   end
 
   def list_rentals_for_person(person_manager)
@@ -49,5 +52,44 @@ class RentalManager
     person_manager.list_rentals_for_person_id(id)
   end
 
+  def list_all_rentals
+    if @rentals.empty?
+      puts 'No rentals found.'
+    else
+      puts 'List of Rentals:'
+      @rentals.each do |rental|
+        puts "Book: #{rental.book.title}, Person: #{rental.person.name}, Date: #{rental.date}"
+      end
+    end
+  end
+
+  def write_rentals_json
+    rental_data = @rentals.map(&:to_hash)
+    File.open('rental.json', 'w') do |f|
+      f.write(JSON.pretty_generate(rental_data))
+    end
+  end
+
+  def load_rentals_data
+    rental_data = JSON.parse(File.read('rental.json'))
+    rental_data.each do |rental_hash|
+      book_title = rental_hash['book']
+      person_name = rental_hash['person']
+      rental_date = rental_hash['date']
+
+      book = @books.get_book_by_title(book_title)
+      person = @people.get_person_by_name(person_name)
+
+      if book && person
+        rental = Rental.new(book, person, rental_date)
+        book.add_rental(rental)
+        person.add_rental(rental)
+        @rentals.push(rental)
+      else
+        puts 'Invalid book or person!'
+      end
+    end
+  end
+  
  
 end

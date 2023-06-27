@@ -1,5 +1,3 @@
-require './person'
-
 class Teacher < Person
   attr_accessor :specialization
 
@@ -10,5 +8,15 @@ class Teacher < Person
 
   def can_use_services?
     true
+  end
+
+  def to_hash
+    {
+      type: 'teacher',
+      id: id,
+      name: name,
+      age: age,
+      specialization: specialization
+    }
   end
 end
