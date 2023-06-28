@@ -8,7 +8,8 @@ class Menu
   end
 
   def display_menu
-    puts 'Please select an option:'
+   
+    puts 'Welcome to the App Please select an option:'
     puts '1. List all books'
     puts '2. List all people'
     puts '3. Create a person'

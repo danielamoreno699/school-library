@@ -39,7 +39,7 @@ class RentalManager
       book.add_rental(rental)
       person.add_rental(rental)
       @rentals.push(rental)
-      puts "Rental created: Book Title: #{book.title}, Person Name: #{person.name}, Date: #{date}"
+      puts "Rental created: Book Title: #{book.title}, Person Name: #{person.name}, Date: #{date}, ID: #{person.id}"
     else
       puts 'Invalid book or person!'
     end
@@ -58,7 +58,7 @@ class RentalManager
     else
       puts 'List of Rentals:'
       @rentals.each do |rental|
-        puts "Book: #{rental.book.title}, Person: #{rental.person.name}, Date: #{rental.date}"
+        puts "Book: #{rental.book.title}, Person: #{rental.person.name}, ID: #{rental.person.id}, Date: #{rental.date}"
       end
     end
   end
@@ -80,7 +80,13 @@ class RentalManager
       book = @books.get_book_by_title(book_title)
       person = @people.get_person_by_name(person_name)
 
-      create_rental(book, person, rental_date)
+      if book && person
+        rental = Rental.new(book, person, rental_date)
+        book.add_rental(rental)
+        person.add_rental(rental)
+        @rentals.push(rental)
+      end
+      #create_rental(book, person, rental_date) 
     end
   end
   

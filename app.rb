@@ -9,15 +9,13 @@ class App
     @book_manager = BookManager.new
     @rental_manager = RentalManager.new(@person_manager, @book_manager)
     load_files_data
+
   end
 
   def load_files_data
     @book_manager.load_books_data
-    list_all_books
     @person_manager.load_people_data
-    list_all_people
     @rental_manager.load_rentals_data
-    list_all_rentals
   end
 
   def list_all_books

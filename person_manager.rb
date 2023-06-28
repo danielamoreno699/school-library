@@ -105,9 +105,9 @@ class PersonManager
       puts 'Invalid person type!'
       return
     end
-
+  
     @people.push(person)
-
+    
     
   end
 

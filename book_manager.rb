@@ -59,7 +59,6 @@ class BookManager
       else
         book_data = JSON.parse(File.read('book.json'))
         book_data.each do |book|
-          #create_book(book['title'], book['author'])
            @books << Book.new(book['title'], book['author'])
         end
       end
