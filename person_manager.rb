@@ -107,26 +107,13 @@ class PersonManager
     end
   
     @people.push(person)
+    puts 'Person created successfully!'
     
     
   end
 
-  # def create_person(id, name, age, type, extra_info)
-  #   if type == 'student'
-  #     person = Student.new(id,name, age, parent_permission: extra_info[:parent_permission])
-  #   elsif type == 'teacher'
-  #     person = Teacher.new(id, name, age, extra_info[:specialization])
-  #   else
-  #     puts 'Invalid person type!'
-  #     return
-  #   end
-  
-  #   @people.push(person)
-    
-    
-  # end
 
-  def create_person(id, name, age, type, extra_info)
+  def create_person_json(id, name, age, type, extra_info)
     if type == 'student'
       person = Student.new(id, name, age, parent_permission: extra_info[:parent_permission])
     elsif type == 'teacher'
@@ -150,32 +137,7 @@ class PersonManager
   end
 
   
-  # def load_people_data
-  #   if File.exist?('people.json')
-  #     file_data = File.read('people.json')
-  #     people_data = JSON.parse(file_data)
-  
-  #     people_data.each do |person|
-  #       id = person['id']
-  #       name = person['name']
-  #       age = person['age']
-  #       type = person['type']
-  
-  #       if type == 'student'
-  #         parent_permission = person['parent_permission']
-  #         create_person(id: id, name: name, age: age, type: type, parent_permission: parent_permission || true)
-  #       elsif type == 'teacher'
-  #         specialization = person['specialization']
-  #         create_person(id: id, name: name, age: age, type: type, specialization: specialization)
-  #       else
-  #         puts 'Invalid person type!'
-  #         return
-  #       end
-  #     end
-  #   else
-  #     puts 'people.json file does not exist.'
-  #   end
-  # end
+
   def load_people_data
     if File.exist?('people.json')
       file_data = File.read('people.json')
@@ -189,10 +151,10 @@ class PersonManager
 
         if type == 'student'
           parent_permission = person['parent_permission']
-          create_person(id, name, age, type, parent_permission: parent_permission || true)
+          create_person_json(id, name, age, type, parent_permission: parent_permission || true)
         elsif type == 'teacher'
           specialization = person['specialization']
-          create_person(id, name, age, type, specialization: specialization)
+          create_person_json(id, name, age, type, specialization: specialization)
         else
           puts 'Invalid person type!'
           return
