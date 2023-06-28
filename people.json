@@ -4,7 +4,7 @@
     "id": 388,
     "name": "luis",
     "age": 14,
-    "parent_permission": false
+    "parent_permission": true
   },
   {
     "type": "teacher",
@@ -12,5 +12,12 @@
     "name": "gina",
     "age": 12,
     "specialization": "teacher"
+  },
+  {
+    "type": "student",
+    "id": 708,
+    "name": "luisa",
+    "age": 12,
+    "parent_permission": false
   }
 ]

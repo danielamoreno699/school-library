@@ -96,7 +96,8 @@ class PersonManager
     create_person_instance(name, age, 'teacher', extra_info)
   end
 
-  def create_person_instance(id, name, age, type, extra_info)
+  def create_person_instance(name, age, type, extra_info)
+    id = Random.rand(1..1000)
     if type == 'student'
       person = Student.new(id,name, age, parent_permission: extra_info[:parent_permission])
     elsif type == 'teacher'
