@@ -1,16 +1,16 @@
 [
   {
     "type": "student",
-    "id": 632,
-    "name": "daniela",
-    "age": 22,
-    "parent_permission": null
+    "id": 388,
+    "name": "luis",
+    "age": 14,
+    "parent_permission": false
   },
   {
     "type": "teacher",
-    "id": 734,
-    "name": "luis",
-    "age": 33,
-    "specialization": null
+    "id": 569,
+    "name": "gina",
+    "age": 12,
+    "specialization": "teacher"
   }
 ]
